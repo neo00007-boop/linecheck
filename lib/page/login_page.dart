@@ -8,6 +8,7 @@ import 'package:linecheck/common/base_provider_widget.dart';
 import 'package:linecheck/common/fl_text_widget.dart';
 import 'package:linecheck/entity/const.dart';
 import 'package:linecheck/entity/http_result_bean.dart';
+import 'package:linecheck/generated/assets.dart';
 import 'package:linecheck/net/login_service.dart';
 import 'package:linecheck/provider/user_info_provider.dart';
 import 'package:linecheck/util/macro.dart';
@@ -103,7 +104,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                   policy: OrderedTraversalPolicy(),
                   child: Column(
                     children: [
-                      Image(image: AssetImage("assets/common/app_logo.png"), width: 80.w, height: 80.w),
+                      Image(image: AssetImage(Assets.commonAppLogo), width: 80.w, height: 80.w),
                       FLText(
                         kAppName,
                         margin: EdgeInsets.only(top: 12.h),
@@ -154,7 +155,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                                 width: 20.w,
                                 padding: EdgeInsets.zero,
                                 alignment: Alignment.centerLeft,
-                                child: Image.asset(/*Assets.loginLoginPhone*/ "assets/login/login_phone.png", width: 20.w, height: 20.h),
+                                child: Image.asset(Assets.loginLoginPhone, width: 20.w, height: 20.h),
                               ),
                               prefixIconConstraints: BoxConstraints(minWidth: 25),
                               suffixIcon: AnimatedOpacity(
@@ -168,7 +169,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                                   style: IconButton.styleFrom(
                                     // splashFactory: NoSplash.splashFactory,
                                   ),
-                                  icon: Image(image: AssetImage(/*Assets.loginLoginCleanText*/ "assets/login/login_clean_text.png"), height: 20.h),
+                                  icon: Image(image: AssetImage(Assets.loginLoginCleanText), height: 20.h),
                                   onPressed: () {
                                     _accountController.clear();
                                   },
@@ -214,7 +215,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                                 width: 20.w,
                                 padding: EdgeInsets.zero,
                                 alignment: Alignment.centerLeft,
-                                child: Image.asset(/*Assets.loginLoginPassword*/ "assets/login/login_password.png", width: 20.w, height: 20.h),
+                                child: Image.asset(Assets.loginLoginPassword, width: 20.w, height: 20.h),
                               ),
                               prefixIconConstraints: BoxConstraints(minWidth: 25),
                               suffixIcon: IconButton(
@@ -230,8 +231,8 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                                 icon: Image(
                                   image: AssetImage(
                                     _viewPassword
-                                        ? /*Assets.loginLoginHidden*/ "assets/login/login_hidden.png"
-                                        : /*Assets.loginLoginView*/ "assets/login/login_password.png",
+                                        ? Assets.loginLoginHidden
+                                        : Assets.loginLoginView,
                                   ),
                                   height: 20.h,
                                 ),
