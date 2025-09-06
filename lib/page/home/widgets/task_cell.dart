@@ -1,7 +1,7 @@
 import 'package:linecheck/entity/line_info_entity.dart';
 import 'package:linecheck/index.dart';
 import 'package:linecheck/model/task_model.dart';
-import 'package:linecheck/page/detail-page.dart';
+import 'package:linecheck/page/detail_page.dart';
 
 ///今日任务的cell
 class TaskCell extends StatelessWidget {
