@@ -72,7 +72,8 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
       device = deviceInfo.brand + deviceInfo.model;
     }
     showLoading();
-    HttpResultBean? result = await LoginService.login(account: _accountController.text.trim(), password: _passwordController.text.trim(), device: device);
+    var name = _accountController.text.trim();
+    HttpResultBean? result = await LoginService.login(account: name, password: _passwordController.text.trim(), device: device);
     if (result != null && result.succeed) {
       if (context.mounted) {
         _loginSuccess(result);
@@ -81,9 +82,9 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
       result = HttpResultBean();
       var entity = UserInfoEntity(
           uid: 007,
-          username: "007",
+          username: /*"007"*/name,
           token: "007",
-          nickname: "007",
+          nickname: /*"007"*/name,
           accessToken: "007",
           refreshToken: "007",
           expiresIn: 10000000000,

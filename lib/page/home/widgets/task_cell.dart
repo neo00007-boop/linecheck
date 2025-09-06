@@ -29,14 +29,14 @@ class TaskCell extends StatelessWidget {
           Button(
             onPressed: (){
               if (!task.isDone) {
-                Future<void>.delayed(Duration(seconds: 2), () {
+                //Future<void>.delayed(Duration(seconds: 2), () {
                   LineInfoEntity entity = LineInfoEntity();
                   entity.id = 1000;
                   entity.url = "https://www.baidu.com";
                   entity.checkTime = "";
                   entity.resultOk = false;
                   NavigatorUtils.push(context, DetailPage(entity: entity), valueSetter: (value) {});
-                });
+                //});
               }
             },
             text: task.isDone ? '检测完成' : '开始检测',
