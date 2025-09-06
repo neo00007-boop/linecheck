@@ -2,6 +2,9 @@
 class Assets {
   Assets._();
 
+  static const String assetsCanvaskitCanvaskit = 'assets/canvaskit/canvaskit.wasm';
+  static const String assetsIcUser = 'assets/ic_user.png';
+  static const String canvaskitCanvaskit = 'assets/canvaskit/canvaskit.js';
   static const String commonAppLogo = 'assets/common/app_logo.png';
   static const String commonDefalutChatImage = 'assets/common/defalut_chat_image.png';
   static const String commonDefaultAvatar = 'assets/common/default_avatar.png';
@@ -20,5 +23,6 @@ class Assets {
   static const String loginLoginPassword = 'assets/login/login_password.png';
   static const String loginLoginPhone = 'assets/login/login_phone.png';
   static const String loginLoginView = 'assets/login/login_view.png';
+  static const String robotoRobotoRegular = 'assets/fonts/Roboto/Roboto-Regular.woff2';
 
 }
