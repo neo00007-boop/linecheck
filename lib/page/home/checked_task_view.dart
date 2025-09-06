@@ -13,8 +13,11 @@ class CheckedTaskView extends StatefulWidget {
   State<CheckedTaskView> createState() => _CheckedTaskViewState();
 }
 
-class _CheckedTaskViewState extends State<CheckedTaskView> {
+class _CheckedTaskViewState extends State<CheckedTaskView> with AutomaticKeepAliveClientMixin {
   List<TaskModel> list = [];
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -52,6 +55,7 @@ class _CheckedTaskViewState extends State<CheckedTaskView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return _listView();
   }
 

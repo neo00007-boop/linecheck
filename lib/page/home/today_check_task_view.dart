@@ -12,8 +12,11 @@ class TodayCheckTaskView extends StatefulWidget {
   State<TodayCheckTaskView> createState() => _TodayCheckTaskViewState();
 }
 
-class _TodayCheckTaskViewState extends State<TodayCheckTaskView> {
+class _TodayCheckTaskViewState extends State<TodayCheckTaskView> with AutomaticKeepAliveClientMixin {
   List<TaskModel> list = [];
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -51,6 +54,7 @@ class _TodayCheckTaskViewState extends State<TodayCheckTaskView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         _titleText(),
