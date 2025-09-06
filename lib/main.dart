@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
                 navigatorObservers: [routeObserver],
                 navigatorKey: NavigatorUtils.instance.navigatorKey,
                 theme: ThemeData(
+                  fontFamily: "Roboto",
                   // primarySwatch: MyColor.primarySwatch,
                   // splashColor: Colors.red,
                   primaryColor: Colors.white,
