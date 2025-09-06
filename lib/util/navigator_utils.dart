@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:linecheck/page/main_tab_page.dart';
+import 'package:linecheck/page/home/main_tab_page.dart';
 import 'package:linecheck/util/macro.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'flutter_utils.dart';

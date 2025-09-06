@@ -153,20 +153,20 @@ class Button extends StatelessWidget {
                   ), //
                 )
               : null,
-          gradient:
-              gradient ??
-              (type == ButtonType.primary
-                  ? LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.white38, Colors.white38],
-                    )
-                  : null),
+          // gradient:
+          //     gradient ??
+          //     (type == ButtonType.primary
+          //         ? LinearGradient(
+          //             begin: Alignment.topCenter,
+          //             end: Alignment.bottomCenter,
+          //             colors: [Colors.white38, Colors.white38],
+          //           )
+          //         : null),
           color: gradient != null
               ? null
               : isTypeGrey
-              ? (type == ButtonType.primary ? Colors.white38 : Colors.white38)
-              : color ?? Colors.white38,
+              ? (type == ButtonType.primary ? Colors.black12 : Colors.white38)
+              : color ?? Colors.black12,
           boxShadow: boxShadow,
         ),
         child: Row(
@@ -187,14 +187,14 @@ class Button extends StatelessWidget {
                   color:
                       fontColor ??
                       (type == ButtonType.primary && _disabled
-                          ? Colors.white.withValues(alpha: 0.7)
+                          ? Colors.black.withValues(alpha: 0.3)
                           : (isTypeText
-                                ? (borderColor ?? Colors.white).withValues(
+                                ? (borderColor ?? Colors.black).withValues(
                                     alpha: _opacity,
                                   )
                                 : isTypeGrey
-                                ? Colors.grey
-                                : Colors.white.withValues(alpha: _opacity))),
+                                ? Colors.black
+                                : Colors.black.withValues(alpha: _opacity))),
                 ),
               ),
             if (text is Widget) text,

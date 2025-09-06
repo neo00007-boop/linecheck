@@ -1,6 +1,8 @@
 import 'package:linecheck/common/button.dart';
 import 'package:linecheck/common/my_tooltip.dart';
 import 'package:linecheck/index.dart';
+import 'package:linecheck/page/home/checked_task_view.dart';
+import 'package:linecheck/page/home/today_check_task_view.dart';
 
 class MainTabPage extends StatefulWidget {
   const MainTabPage({super.key});
@@ -9,36 +11,60 @@ class MainTabPage extends StatefulWidget {
   State<MainTabPage> createState() => _MainTabPageState();
 }
 
-class _MainTabPageState extends State<MainTabPage> {
+class _MainTabPageState extends State<MainTabPage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppbar(),
       backgroundColor: Color(0xFFF0F0F0),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [_buildCheckCountView()],
-        ),
-      ),
+      body: _buildCheckCountView(),
     );
   }
 
   _buildCheckCountView() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
       children: [
-        SizedBox(width: 16),
-        Text(
-          "今日待检测: 999",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+        Divider(height: 1, color: Color(0xFFF0F0F0), thickness: 1),
+        Container(
+          color: Colors.white,
+          child: TabBar(
+            controller: _tabController,
+            indicator: BoxDecoration(
+              color: Color(0xFFD1D1D1),
+              borderRadius: BorderRadius.circular(0),
+            ),
+            unselectedLabelColor: Colors.black,
+            labelColor: Colors.black,
+            tabs: [
+              Tab(text: '今日任务'),
+              Tab(text: '已测任务'),
+            ],
+            labelStyle: TextStyle(fontSize: 16),
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorColor: Colors.transparent,
+            dividerHeight: 0,
+          ),
         ),
-        SizedBox(width: 20),
-        Text(
-          "今日已检测: 888",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: [TodayCheckTaskView(), CheckedTaskView()],
+          ),
         ),
       ],
     );
