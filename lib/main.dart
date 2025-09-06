@@ -12,9 +12,9 @@ import 'package:linecheck/util/navigator_utils.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  Provider.debugCheckInvalidValueType = null;
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  // Provider.debugCheckInvalidValueType = null;
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
@@ -30,12 +30,12 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<UserInfoProvider>(
         builder: (context, userInfo, child) {
-          return ScreenUtilInit(
+          /*return ScreenUtilInit(
             designSize: Global.designSize(),
             // minTextAdapt: true,
             splitScreenMode: true,
             useInheritedMediaQuery: true,
-            builder: (context, child) {
+            builder: (context, child) {*/
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
                 routes: routesMap,
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
                     centerTitle: true,
                     elevation: 0,
                     color: Colors.white,
-                    titleTextStyle: TextStyle(fontSize: 16.sp, color: Colors.black, fontWeight: FontWeight.w500),
+                    titleTextStyle: TextStyle(fontSize: 16/*.sp*/, color: Colors.black, fontWeight: FontWeight.w500),
                     iconTheme: IconThemeData(color: MyColor.fromHex("#222222")),
                   ),
                 ),
@@ -72,8 +72,8 @@ class MyApp extends StatelessWidget {
                 // supportedLocales: S.delegate.supportedLocales,
                 // locale: locale.value,
               );
-            },
-          );
+            // },
+          // );
         },
       ),
     );

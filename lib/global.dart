@@ -25,17 +25,22 @@ class Global {
 
   /// UI 标准适配尺寸
   static Size designSize() {
-    if (Platform.isAndroid) {
+    /*if (Platform.isAndroid) {
       return Size(375, 812);
     } else if (Platform.isIOS) {
       return Size(375, 812);
     } else {
       return Size(375, 812);
-    }
+    }*/
+    return Size(375, 812);
+  }
+
+  static bool isWeb() {
+    return kIsWeb;
   }
 
   static void setupSystemUI() {
-    if (Platform.isAndroid) {
+    if (!isWeb() && Platform.isAndroid) {
       // 以下两行 设置android状态栏为透明的沉浸。
       // 写在组件渲染之后，是为了在渲染后进行set赋值，覆盖状态栏，
       // 写在渲染之前MaterialApp组件会覆盖掉这个值。

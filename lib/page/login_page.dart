@@ -9,6 +9,7 @@ import 'package:linecheck/common/fl_text_widget.dart';
 import 'package:linecheck/entity/const.dart';
 import 'package:linecheck/entity/http_result_bean.dart';
 import 'package:linecheck/generated/assets.dart';
+import 'package:linecheck/global.dart';
 import 'package:linecheck/net/login_service.dart';
 import 'package:linecheck/provider/user_info_provider.dart';
 import 'package:linecheck/util/macro.dart';
@@ -60,7 +61,10 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
 
   Future<void> loginOnClick() async {
     var device = "";
-    if (Platform.isIOS) {
+    if (Global.isWeb()) {
+      var deviceInfo = await _deviceInfoPlugin.webBrowserInfo;
+      device = deviceInfo.browserName.name;
+    } else if (Platform.isIOS) {
       var deviceInfo = await _deviceInfoPlugin.iosInfo;
       device = deviceInfo.utsname.machine;
     } else {
@@ -96,7 +100,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
         children: [
           SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.fromLTRB(28.w, 98.h, 28.w, 0),
+              padding: EdgeInsets.fromLTRB(28/*.w*/, 98/*.h*/, 28/*.w*/, 0),
               alignment: Alignment.center,
               child: Form(
                 key: _formKey,
@@ -104,16 +108,16 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                   policy: OrderedTraversalPolicy(),
                   child: Column(
                     children: [
-                      Image(image: AssetImage(Assets.commonAppLogo), width: 80.w, height: 80.w),
+                      Image(image: AssetImage(Assets.commonAppLogo), width: 80/*.w*/, height: 80/*.w*/),
                       FLText(
                         kAppName,
-                        margin: EdgeInsets.only(top: 12.h),
-                        style: TextStyle(color: MyColor.fromHex("#19D6CE"), fontSize: 16.sp),
+                        margin: EdgeInsets.only(top: 12/*.h*/),
+                        style: TextStyle(color: MyColor.fromHex("#19D6CE"), fontSize: 16/*.sp*/),
                       ),
                       //用户名
                       Container(
-                        margin: EdgeInsets.only(top: 42.h),
-                        // height: 52.h,
+                        margin: EdgeInsets.only(top: 42/*.h*/),
+                        // height: 52/*.h*/,
                         child: FocusTraversalOrder(
                           order: NumericFocusOrder(1),
                           child: TextFormField(
@@ -129,7 +133,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                               }
                               return null;
                             },
-                            style: TextStyle(color: MyColor.fromHex("#222222"), fontSize: 14.sp),
+                            style: TextStyle(color: MyColor.fromHex("#222222"), fontSize: 14/*.sp*/),
                             scrollPadding: EdgeInsets.zero,
                             onChanged: (value) {
                               setState(() {
@@ -140,22 +144,22 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                               contentPadding: EdgeInsets.zero,
                               hintText: /*S.current.str_please_enter_an_account*/ "请输入用账号",
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: MyColor.fromHex("#CACCD3"), width: 0.5.h),
+                                borderSide: BorderSide(color: MyColor.fromHex("#CACCD3"), width: 0.5/*.h*/),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: MyColor.fromHex("#CACCD3"), width: 0.5.h),
+                                borderSide: BorderSide(color: MyColor.fromHex("#CACCD3"), width: 0.5/*.h*/),
                               ),
                               errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red, width: 0.5.h),
+                                borderSide: BorderSide(color: Colors.red, width: 0.5/*.h*/),
                               ),
                               focusedErrorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red, width: 0.5.h),
+                                borderSide: BorderSide(color: Colors.red, width: 0.5/*.h*/),
                               ),
                               prefixIcon: Container(
-                                width: 20.w,
+                                width: 20/*.w*/,
                                 padding: EdgeInsets.zero,
                                 alignment: Alignment.centerLeft,
-                                child: Image.asset(Assets.loginLoginPhone, width: 20.w, height: 20.h),
+                                child: Image.asset(Assets.loginLoginPhone, width: 20/*.w*/, height: 20/*.h*/),
                               ),
                               prefixIconConstraints: BoxConstraints(minWidth: 25),
                               suffixIcon: AnimatedOpacity(
@@ -169,7 +173,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                                   style: IconButton.styleFrom(
                                     // splashFactory: NoSplash.splashFactory,
                                   ),
-                                  icon: Image(image: AssetImage(Assets.loginLoginCleanText), height: 20.h),
+                                  icon: Image(image: AssetImage(Assets.loginLoginCleanText), height: 20/*.h*/),
                                   onPressed: () {
                                     _accountController.clear();
                                   },
@@ -181,8 +185,8 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                       ),
                       //密码
                       Container(
-                        margin: EdgeInsets.only(top: 15.h),
-                        // height: 52.h,
+                        margin: EdgeInsets.only(top: 15/*.h*/),
+                        // height: 52/*.h*/,
                         child: FocusTraversalOrder(
                           order: NumericFocusOrder(2),
                           child: TextFormField(
@@ -196,26 +200,26 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                               }
                               return null;
                             },
-                            style: TextStyle(color: MyColor.fromHex("#222222"), decorationColor: Colors.red, fontSize: 14.sp),
+                            style: TextStyle(color: MyColor.fromHex("#222222"), decorationColor: Colors.red, fontSize: 14/*.sp*/),
                             decoration: InputDecoration(
                               hintText: /*S.current.str_please_input_a_password*/ "请输入用密码",
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: MyColor.fromHex("#CACCD3"), width: 0.5.h),
+                                borderSide: BorderSide(color: MyColor.fromHex("#CACCD3"), width: 0.5/*.h*/),
                               ),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: MyColor.fromHex("#CACCD3"), width: 0.5.h),
+                                borderSide: BorderSide(color: MyColor.fromHex("#CACCD3"), width: 0.5/*.h*/),
                               ),
                               errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red, width: 0.5.h),
+                                borderSide: BorderSide(color: Colors.red, width: 0.5/*.h*/),
                               ),
                               focusedErrorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red, width: 0.5.h),
+                                borderSide: BorderSide(color: Colors.red, width: 0.5/*.h*/),
                               ),
                               prefixIcon: Container(
-                                width: 20.w,
+                                width: 20/*.w*/,
                                 padding: EdgeInsets.zero,
                                 alignment: Alignment.centerLeft,
-                                child: Image.asset(Assets.loginLoginPassword, width: 20.w, height: 20.h),
+                                child: Image.asset(Assets.loginLoginPassword, width: 20/*.w*/, height: 20/*.h*/),
                               ),
                               prefixIconConstraints: BoxConstraints(minWidth: 25),
                               suffixIcon: IconButton(
@@ -226,7 +230,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                                 alignment: Alignment.centerRight,
                                 style: IconButton.styleFrom(
                                   alignment: Alignment.centerRight,
-                                  // splashFactory: NoSplash.splashFactory,
+                                  // splashFactory: NoSplash/*.sp*/lashFactory,
                                 ),
                                 icon: Image(
                                   image: AssetImage(
@@ -234,7 +238,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                                         ? Assets.loginLoginHidden
                                         : Assets.loginLoginView,
                                   ),
-                                  height: 20.h,
+                                  height: 20/*.h*/,
                                 ),
                                 onPressed: () {
                                   setState(() {
@@ -242,16 +246,16 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                                   });
                                 },
                               ),
-                              // suffixIconConstraints: BoxConstraints(maxWidth: 30.w)
+                              // suffixIconConstraints: BoxConstraints(maxWidth: 30/*.w*/)
                             ),
                           ),
                         ),
                       ),
                       //登录按钮
                       Container(
-                        margin: EdgeInsets.only(top: 30.h),
+                        margin: EdgeInsets.only(top: 30/*.h*/),
                         width: double.infinity,
-                        height: 48.h,
+                        height: 48/*.h*/,
                         child: FocusTraversalOrder(
                           order: NumericFocusOrder(3),
                           child: TextButton(
@@ -270,11 +274,11 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 20.h),
+                        margin: EdgeInsets.only(top: 20/*.h*/),
                         child: RichText(
                           text: TextSpan(
                             text: /*S.current.str_login_is_considered_as_consent*/ "登录即视为同意",
-                            style: TextStyle(fontSize: 11.sp, color: MyColor.fromHex("#979AA7")),
+                            style: TextStyle(fontSize: 11/*.sp*/, color: MyColor.fromHex("#979AA7")),
                             children: <TextSpan>[
                               TextSpan(
                                 text: /*'《${S.current.str_user_license_agreement}》'*/ '《用户许可协议》',
@@ -301,14 +305,14 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 18.h),
+                        margin: EdgeInsets.only(top: 18/*.h*/),
                         padding: EdgeInsets.zero,
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           child: Text(
                             /*S.current.str_no_account*/
                             "没有账号？立即注册",
-                            style: TextStyle(fontSize: 14.sp, color: MyColor.fromHex("#4A4C52")),
+                            style: TextStyle(fontSize: 14/*.sp*/, color: MyColor.fromHex("#4A4C52")),
                           ),
                           onPressed: () {
                             // NavigatorUtils.push(context, RegisterPage());
@@ -332,7 +336,7 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                     if (snapshot.hasData) {
                       return Text(
                         'V${snapshot.data}',
-                        style: TextStyle(fontSize: 14.sp, color: MyColor.fromHex("#4A4C52")),
+                        style: TextStyle(fontSize: 14/*.sp*/, color: MyColor.fromHex("#4A4C52")),
                       );
                     } else {
                       return CircularProgressIndicator();
