@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:linecheck/common/base_provider_widget.dart';
 import 'package:linecheck/common/fl_text_widget.dart';
 import 'package:linecheck/entity/const.dart';
@@ -75,16 +74,19 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
     HttpResultBean? result = await LoginService.login(account: _accountController.text.trim(), password: _passwordController.text.trim(), device: device);
     if (result != null && result.succeed) {
       if (context.mounted) {
-        Provider.of<UserInfoProvider>(context, listen: false).userInfo = result.data;
-        // RongCloudManager.instance.connect();
-        if (widget.popToRoot) {
-          NavigatorUtils.pushMain(context);
-        } else {
-          Navigator.maybePop(context);
-        }
+        _loginSuccess(result);
       }
     }
     dismissLoading();
+  }
+
+  void _loginSuccess(HttpResultBean result){
+    Provider.of<UserInfoProvider>(context, listen: false).userInfo = result.data;
+    if (widget.popToRoot) {
+      NavigatorUtils.pushMain(context);
+    } else {
+      Navigator.maybePop(context);
+    }
   }
 
   @override
@@ -97,11 +99,15 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
+        alignment: Alignment.topCenter,
         children: [
           SingleChildScrollView(
             child: Container(
+              alignment: Alignment.topCenter,
               padding: EdgeInsets.fromLTRB(28/*.w*/, 98/*.h*/, 28/*.w*/, 0),
-              alignment: Alignment.center,
+              constraints: BoxConstraints(
+                maxWidth: 550,
+              ),
               child: Form(
                 key: _formKey,
                 child: FocusTraversalGroup(
