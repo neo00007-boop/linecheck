@@ -49,9 +49,9 @@ class _MyTooltipState extends State<MyTooltip> {
       top: -10,
       right: -10,
       barrierColor: Colors.transparent,
-      borderColor: Colors.transparent,
+      borderColor: Colors.grey,
       content: widget.tipsChild,
-      backgroundColor: Color(0xFFAFAFAF),
+      backgroundColor: Colors.white,
       child: GestureDetector(
         onTap: () {
           if (!_controller.isVisible) {
