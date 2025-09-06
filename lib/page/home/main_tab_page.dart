@@ -3,6 +3,7 @@ import 'package:linecheck/generated/app_colors.dart';
 import 'package:linecheck/index.dart';
 import 'package:linecheck/page/home/checked_task_view.dart';
 import 'package:linecheck/page/home/today_check_task_view.dart';
+import 'package:linecheck/page/home/widgets/menu_button.dart';
 
 class MainTabPage extends StatefulWidget {
   const MainTabPage({super.key});
@@ -13,19 +14,8 @@ class MainTabPage extends StatefulWidget {
 
 class _MainTabPageState extends State<MainTabPage>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+  final PageController _pageController = PageController();
+  int activeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,30 +29,42 @@ class _MainTabPageState extends State<MainTabPage>
   _buildCheckCountView() {
     return Column(
       children: [
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          color: AppColors.primary,
-          child: TabBar(
-            controller: _tabController,
-            indicator: BoxDecoration(
-              color: Color(0xFFD1D1D1),
-              borderRadius: BorderRadius.circular(0),
-            ),
-            unselectedLabelColor: AppColors.primary.withOpacity(0.2),
-            labelColor: Colors.black,
-            tabs: [
-              Tab(text: '今日任务'),
-              Tab(text: '已测任务'),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          child: Row(
+            children: [
+              Expanded(
+                child: MenuButton(
+                  title: '今日任务',
+                  onTap: () {
+                    setState(() {
+                      activeIndex = 0;
+                    });
+                    _pageController.jumpToPage(0);
+                  },
+                  active: activeIndex == 0,
+                ),
+              ),
+
+              SizedBox(width: 20),
+              Expanded(
+                child: MenuButton(
+                  title: '已测任务',
+                  onTap: () {
+                    setState(() {
+                      activeIndex = 1;
+                    });
+                    _pageController.jumpToPage(1);
+                  },
+                  active: activeIndex == 1,
+                ),
+              ),
             ],
-            labelStyle: TextStyle(fontSize: 16),
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorColor: Colors.transparent,
-            dividerHeight: 0,
           ),
         ),
         Expanded(
-          child: TabBarView(
-            controller: _tabController,
+          child: PageView(
+            controller: _pageController,
             children: [TodayCheckTaskView(), CheckedTaskView()],
           ),
         ),
@@ -152,18 +154,23 @@ class _MainTabPageState extends State<MainTabPage>
     required VoidCallback onTap,
     double? radius,
     double? width,
+    double? height,
+    Color? textColor,
   }) {
     return InkWell(
       onTap: onTap,
       child: Container(
         width: width ?? 60,
-        height: 32,
+        height: height ?? 32,
         decoration: BoxDecoration(
           color: bg,
           borderRadius: BorderRadius.circular(radius ?? 16),
         ),
         alignment: Alignment.center,
-        child: Text(title, style: TextStyle(fontSize: 14, color: Colors.white)),
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 14, color: textColor ?? Colors.white),
+        ),
       ),
     );
   }

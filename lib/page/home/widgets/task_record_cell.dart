@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:linecheck/common/button.dart';
 import 'package:linecheck/model/task_model.dart';
 
 import '../../../entity/line_info_entity.dart';
@@ -15,20 +14,22 @@ class TaskRecordCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 60,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Flexible(
                   child: Text(
                     task.url,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.blue, fontSize: 12),
+                    style: TextStyle(color: Colors.blue, fontSize: 14),
                   ),
                 ),
                 Text(
@@ -38,17 +39,45 @@ class TaskRecordCell extends StatelessWidget {
               ],
             ),
           ),
-          Button(text: '查看结果', disabled: false, height: 30, width: 90,onPressed: (){
-            Future<void>.delayed(Duration(seconds: 2), () {
-              LineInfoEntity entity = LineInfoEntity();
-              entity.id = 1000;
-              entity.url = "https://www.baidu.com";
-              entity.checkTime = "";
-              entity.resultOk = false;
-              NavigatorUtils.push(context, DetailPage(entity: entity), valueSetter: (value) {});
-            });
-          },),
+          _button(
+            title: '查看结果',
+            onTap: () {
+              Future<void>.delayed(Duration(seconds: 2), () {
+                LineInfoEntity entity = LineInfoEntity();
+                entity.id = 1000;
+                entity.url = "https://www.baidu.com";
+                entity.checkTime = "";
+                entity.resultOk = false;
+                NavigatorUtils.push(
+                  context,
+                  DetailPage(entity: entity),
+                  valueSetter: (value) {},
+                );
+              });
+            },
+            bg: Colors.orangeAccent,
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _button({
+    required String title,
+    required Color bg,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: 90,
+        height: 38,
+        decoration: BoxDecoration(
+          color: bg,
+          borderRadius: BorderRadius.circular(19),
+        ),
+        alignment: Alignment.center,
+        child: Text(title, style: TextStyle(fontSize: 14, color: Colors.white)),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:linecheck/common/button.dart';
 import 'package:linecheck/entity/line_info_entity.dart';
+import 'package:linecheck/generated/app_colors.dart';
 import 'package:linecheck/index.dart';
 import 'package:linecheck/model/task_model.dart';
 import 'package:linecheck/page/detail-page.dart';
@@ -14,7 +15,7 @@ class TaskCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 44,
+      height: 60,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -23,11 +24,14 @@ class TaskCell extends StatelessWidget {
               task.url,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.blue, fontSize: 12),
+              style: TextStyle(
+                color: task.isDone ? Colors.lightBlueAccent : Colors.orange,
+                fontSize: 14,
+              ),
             ),
           ),
-          Button(
-            onPressed: (){
+          _button(
+            onTap: () {
               if (!task.isDone) {
                 Future<void>.delayed(Duration(seconds: 2), () {
                   LineInfoEntity entity = LineInfoEntity();
@@ -35,16 +39,38 @@ class TaskCell extends StatelessWidget {
                   entity.url = "https://www.baidu.com";
                   entity.checkTime = "";
                   entity.resultOk = false;
-                  NavigatorUtils.push(context, DetailPage(entity: entity), valueSetter: (value) {});
+                  NavigatorUtils.push(
+                    context,
+                    DetailPage(entity: entity),
+                    valueSetter: (value) {},
+                  );
                 });
               }
             },
-            text: task.isDone ? '检测完成' : '开始检测',
-            disabled: task.isDone,
-            height: 30,
-            width: 90,
+            title: task.isDone ? '检测完成' : '开始检测',
+            bg: task.isDone ? Colors.blue : Color(0xFFFD7200),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _button({
+    required String title,
+    required Color bg,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: 90,
+        height: 38,
+        decoration: BoxDecoration(
+          color: bg,
+          borderRadius: BorderRadius.circular(19),
+        ),
+        alignment: Alignment.center,
+        child: Text(title, style: TextStyle(fontSize: 14, color: Colors.white)),
       ),
     );
   }

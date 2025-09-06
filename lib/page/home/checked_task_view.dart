@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'dart:math';
 
@@ -13,7 +14,8 @@ class CheckedTaskView extends StatefulWidget {
   State<CheckedTaskView> createState() => _CheckedTaskViewState();
 }
 
-class _CheckedTaskViewState extends State<CheckedTaskView> with AutomaticKeepAliveClientMixin {
+class _CheckedTaskViewState extends State<CheckedTaskView>
+    with AutomaticKeepAliveClientMixin {
   List<TaskModel> list = [];
 
   @override
@@ -56,12 +58,27 @@ class _CheckedTaskViewState extends State<CheckedTaskView> with AutomaticKeepAli
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return _listView();
+    return Container(
+      margin: EdgeInsets.fromLTRB(12, 12, 12, 0),
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
+        ),
+      ),
+      child: _listView(),
+    );
   }
 
   Widget _listView() {
-    return ListView.builder(
-      padding: EdgeInsets.only(bottom: 30, left: 12, right: 12, top: 12),
+    return ListView.separated(
+      separatorBuilder: (_, index) {
+        return Divider(color: Colors.grey.shade100, height: 1, thickness: 1);
+      },
+      padding: EdgeInsets.only(bottom: 30, left: 12, right: 12),
+
       itemCount: list.length,
       itemBuilder: (_, index) {
         final item = list[index];
