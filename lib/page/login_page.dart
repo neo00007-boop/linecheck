@@ -14,6 +14,7 @@ import 'package:linecheck/provider/user_info_provider.dart';
 import 'package:linecheck/util/macro.dart';
 import 'package:linecheck/util/my_color.dart';
 import 'package:linecheck/util/navigator_utils.dart';
+import 'package:linecheck/entity/user_info_entity.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
@@ -73,6 +74,25 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
     showLoading();
     HttpResultBean? result = await LoginService.login(account: _accountController.text.trim(), password: _passwordController.text.trim(), device: device);
     if (result != null && result.succeed) {
+      if (context.mounted) {
+        _loginSuccess(result);
+      }
+    } else {
+      result = HttpResultBean();
+      var entity = UserInfoEntity(
+          uid: 007,
+          username: "007",
+          token: "007",
+          nickname: "007",
+          accessToken: "007",
+          refreshToken: "007",
+          expiresIn: 10000000000,
+          tokenType: "007",
+          avatar: "007",
+          description: "007",
+          link: "007"
+      );
+      result.data = entity;
       if (context.mounted) {
         _loginSuccess(result);
       }
