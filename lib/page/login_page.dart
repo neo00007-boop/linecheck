@@ -103,11 +103,12 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
 
   void _loginSuccess(HttpResultBean result){
     Provider.of<UserInfoProvider>(context, listen: false).userInfo = result.data;
-    if (widget.popToRoot) {
+    /*if (widget.popToRoot) {
       NavigatorUtils.pushMain(context);
     } else {
       Navigator.maybePop(context);
-    }
+    }*/
+    NavigatorUtils.pushMain(context);
   }
 
   @override

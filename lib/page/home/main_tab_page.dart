@@ -4,6 +4,8 @@ import 'package:linecheck/index.dart';
 import 'package:linecheck/page/home/checked_task_view.dart';
 import 'package:linecheck/page/home/today_check_task_view.dart';
 import 'package:linecheck/page/home/widgets/menu_button.dart';
+import 'package:linecheck/page/login_page.dart';
+import 'package:super_tooltip/super_tooltip.dart';
 
 class MainTabPage extends StatefulWidget {
   const MainTabPage({super.key});
@@ -16,6 +18,18 @@ class _MainTabPageState extends State<MainTabPage>
     with SingleTickerProviderStateMixin {
   final PageController _pageController = PageController();
   int activeIndex = 0;
+  late SuperTooltipController _controller;
+
+  @override
+  void initState() {
+    _controller = SuperTooltipController();
+    super.initState();
+  }
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +101,7 @@ class _MainTabPageState extends State<MainTabPage>
             ),
           ),
           MyTooltip(
+            controller: _controller,
             tipsChild: _toolContent(),
             fromChild: Row(
               children: [
@@ -141,7 +156,14 @@ class _MainTabPageState extends State<MainTabPage>
             bg: AppColors.primary,
             radius: 5,
             width: 120,
-            onTap: () {},
+            onTap: () {
+              // Navigator.maybePop(context);
+              if (_controller.isVisible) {
+                _controller.hideTooltip();
+              }
+              UserInfoProvider.logout();
+              NavigatorUtils.pushAndRemoveUntil(context, LoginPage());
+            },
           ),
         ],
       ),

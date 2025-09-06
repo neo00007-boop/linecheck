@@ -7,6 +7,7 @@ class MyTooltip extends StatefulWidget {
     super.key,
     required this.fromChild,
     required this.tipsChild,
+    required this.controller,
     this.popupDirection = TooltipDirection.down,
     this.leftMargin = 50,
   });
@@ -15,15 +16,15 @@ class MyTooltip extends StatefulWidget {
   final Widget tipsChild; // 展示的弹窗
   final TooltipDirection popupDirection; // 默认在上面弹出
   final double leftMargin; //弹出位置和左边的间距
+  final SuperTooltipController controller;
 
   @override
   State<MyTooltip> createState() => _MyTooltipState();
 }
 
 class _MyTooltipState extends State<MyTooltip> {
-  late SuperTooltipController _controller;
 
-  @override
+  /*@override
   void initState() {
     super.initState();
     _controller = SuperTooltipController();
@@ -31,14 +32,14 @@ class _MyTooltipState extends State<MyTooltip> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    widget.controller.dispose();
     super.dispose();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return SuperTooltip(
-      controller: _controller,
+      controller: widget.controller,
       popupDirection: widget.popupDirection,
       showBarrier: true,
       hasShadow: false,
@@ -54,10 +55,10 @@ class _MyTooltipState extends State<MyTooltip> {
       backgroundColor: Colors.white,
       child: GestureDetector(
         onTap: () {
-          if (!_controller.isVisible) {
-            _controller.showTooltip();
+          if (!widget.controller.isVisible) {
+            widget.controller.showTooltip();
           } else {
-            _controller.hideTooltip();
+            widget.controller.hideTooltip();
           }
         },
         child: widget.fromChild,
