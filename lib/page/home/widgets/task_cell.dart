@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:linecheck/common/button.dart';
 import 'package:linecheck/entity/line_info_entity.dart';
-import 'package:linecheck/generated/app_colors.dart';
 import 'package:linecheck/index.dart';
 import 'package:linecheck/model/task_model.dart';
 import 'package:linecheck/page/detail-page.dart';
@@ -46,9 +43,8 @@ class TaskCell extends StatelessWidget {
                     DetailPage(entity: entity),
                     valueSetter: (value) {},
                   );
-                });
-              }
-            },
+                }
+              },
             title: task.isDone ? '检测完成' : '开始检测',
             bg: task.isDone ? Colors.blue : Color(0xFFFD7200),
           ),

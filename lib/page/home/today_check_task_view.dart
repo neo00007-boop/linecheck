@@ -1,10 +1,8 @@
 import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:linecheck/generated/app_colors.dart';
 import 'package:linecheck/model/task_model.dart';
-import 'package:linecheck/page/home/widgets/task_cell.dart';
+import 'package:linecheck/page/home/widgets/task_cell.dart' hide Colors;
 
 ///今日检测
 class TodayCheckTaskView extends StatefulWidget {
