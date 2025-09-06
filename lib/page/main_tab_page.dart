@@ -4,6 +4,7 @@ import 'package:linecheck/entity/line_info_entity.dart';
 import 'package:linecheck/index.dart';
 import 'package:linecheck/page/home/checked_task_view.dart';
 import 'package:linecheck/page/home/today_check_task_view.dart';
+import 'package:linecheck/page/login_page.dart';
 import 'detail-page.dart';
 
 class MainTabPage extends StatefulWidget {
@@ -128,7 +129,10 @@ class _MainTabPageState extends State<MainTabPage>
             ).textTheme.bodyMedium?.copyWith(color: Colors.white70),
           ),
 
-          Button(text: '退出登录', width: 120, height: 36),
+          Button(text: '退出登录', width: 120, height: 36, onPressed: (){
+              Navigator.maybePop(context);
+              NavigatorUtils.pushAndRemoveUntil(context, LoginPage());
+          },),
         ],
       ),
     );

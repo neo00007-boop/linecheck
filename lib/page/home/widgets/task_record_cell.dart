@@ -42,18 +42,12 @@ class TaskRecordCell extends StatelessWidget {
           _button(
             title: '查看结果',
             onTap: () {
-              Future<void>.delayed(Duration(seconds: 2), () {
-                LineInfoEntity entity = LineInfoEntity();
-                entity.id = 1000;
-                entity.url = "https://www.baidu.com";
-                entity.checkTime = "";
-                entity.resultOk = false;
-                NavigatorUtils.push(
-                  context,
-                  DetailPage(entity: entity),
-                  valueSetter: (value) {},
-                );
-              });
+              LineInfoEntity entity = LineInfoEntity();
+              entity.id = 1000;
+              entity.url = "https://www.baidu.com";
+              entity.checkTime = "";
+              entity.resultOk = false;
+              NavigatorUtils.push(context, DetailPage(entity: entity), valueSetter: (value) {});
             },
             bg: Colors.orangeAccent,
           ),

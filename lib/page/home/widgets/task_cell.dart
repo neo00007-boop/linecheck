@@ -33,12 +33,14 @@ class TaskCell extends StatelessWidget {
           _button(
             onTap: () {
               if (!task.isDone) {
-                Future<void>.delayed(Duration(seconds: 2), () {
+                //Future<void>.delayed(Duration(seconds: 2), () {
                   LineInfoEntity entity = LineInfoEntity();
                   entity.id = 1000;
                   entity.url = "https://www.baidu.com";
                   entity.checkTime = "";
                   entity.resultOk = false;
+                  NavigatorUtils.push(context, DetailPage(entity: entity), valueSetter: (value) {});
+                //});
                   NavigatorUtils.push(
                     context,
                     DetailPage(entity: entity),
