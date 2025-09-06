@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:linecheck/model/task_model.dart';
+import 'package:linecheck/page/detail_page.dart';
 
 import '../../../entity/line_info_entity.dart';
 import '../../../util/navigator_utils.dart';
-import '../../detail-page.dart';
 
 ///已测任务的cell
 class TaskRecordCell extends StatelessWidget {
