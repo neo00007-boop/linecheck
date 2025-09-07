@@ -307,8 +307,8 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
                       ),
                       //登录按钮
                       Container(
-                        margin: EdgeInsets.only(top: 30/*.h*/),
-                        width: kIsWeb ? 450 : 360/*double.infinity*/,
+                        margin: EdgeInsets.only(top: 30/*.h*/,left: 20,right: 20),
+                        width: double.infinity,//kIsWeb ? 450 : 360/*double.infinity*/,
                         //constraints: BoxConstraints(maxWidth: 450),
                         height: 48/*.h*/,
                         decoration: BoxDecoration(
