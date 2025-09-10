@@ -68,6 +68,12 @@ class _LoginPageState extends ProviderWidgetState<LoginPage, LoginService> {
     if (Global.isWeb()) {
       var deviceInfo = await _deviceInfoPlugin.webBrowserInfo;
       device = deviceInfo.browserName.name;
+    } else if (Platform.isMacOS) {
+      var deviceInfo = await _deviceInfoPlugin.macOsInfo;
+      device = deviceInfo.model;
+    } else if (Platform.isWindows) {
+      var deviceInfo = await _deviceInfoPlugin.windowsInfo;
+      device = deviceInfo.computerName;
     } else if (Platform.isIOS) {
       var deviceInfo = await _deviceInfoPlugin.iosInfo;
       device = deviceInfo.utsname.machine;
