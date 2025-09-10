@@ -4,7 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:linecheck/common/routes.dart';
 import 'package:linecheck/global.dart';
 import 'package:linecheck/page/home/main_tab_page.dart';
-import 'package:linecheck/page/login_page.dart';
+import 'package:linecheck/page/login/login_view.dart';
 import 'package:linecheck/provider/user_info_provider.dart';
 import 'package:linecheck/util/my_color.dart';
 import 'package:linecheck/util/navigator_utils.dart';

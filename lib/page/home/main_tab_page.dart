@@ -4,7 +4,7 @@ import 'package:linecheck/index.dart';
 import 'package:linecheck/page/home/checked_task_view.dart';
 import 'package:linecheck/page/home/today_check_task_view.dart';
 import 'package:linecheck/page/home/widgets/menu_button.dart';
-import 'package:linecheck/page/login_page.dart';
+import 'package:linecheck/page/login/login_view.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 class MainTabPage extends StatefulWidget {

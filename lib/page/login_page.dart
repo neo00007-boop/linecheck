@@ -21,6 +21,7 @@ import 'package:provider/provider.dart';
 
 import '../generated/app_colors.dart';
 
+@Deprecated("新版使用getx分层")
 class LoginPage extends StatefulWidget {
   // 登录成功是否需要跳到根控制器
   final popToRoot = false;
